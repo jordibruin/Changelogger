@@ -1,6 +1,16 @@
-enum previewMode: String, Identifiable, CaseIterable {
+//
+//  previewMode.swift
+//  Changelogger
+//
+//  Created by Jordi Bruin on 02/10/2024.
+//
+
+import SwiftUI
+
+enum PreviewMode: String, Identifiable, CaseIterable {
     case normal
     case html
+    case json
     case screenshot
     
     var id: String { self.rawValue }
@@ -11,6 +21,8 @@ enum previewMode: String, Identifiable, CaseIterable {
             "Normal"
         case .html:
             "HTML"
+        case .json:
+            "JSON"
         case .screenshot:
             "Screenshot"
         }
@@ -20,9 +32,14 @@ enum previewMode: String, Identifiable, CaseIterable {
     func view(release: Release) -> some View {
         switch self {
         case .normal:
-            NormalTextPreview(release: release)
+            TextEditor(text: .constant(release.normalText))
+                .padding(12)
         case .html:
-            HTMLTextPreview(release: release)
+            TextEditor(text: .constant(release.htmlText))
+                .padding(12)
+        case .json:
+            TextEditor(text: .constant(release.jsonText))
+                .padding(12)
         case .screenshot:
             Text("Screenshot")
         }

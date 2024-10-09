@@ -6,8 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		C28967B42CB541CA00AF68EB /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = C28967B32CB541CA00AF68EB /* Defaults */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		C2499C252CA9D20D0004E033 /* Releaser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Releaser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C2499C252CA9D20D0004E033 /* Changelogger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Changelogger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C28967B42CB541CA00AF68EB /* Defaults in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,7 +45,7 @@
 		C2499C262CA9D20D0004E033 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C2499C252CA9D20D0004E033 /* Releaser.app */,
+				C2499C252CA9D20D0004E033 /* Changelogger.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +53,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C2499C242CA9D20D0004E033 /* Releaser */ = {
+		C2499C242CA9D20D0004E033 /* Changelogger */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C2499C342CA9D20F0004E033 /* Build configuration list for PBXNativeTarget "Releaser" */;
+			buildConfigurationList = C2499C342CA9D20F0004E033 /* Build configuration list for PBXNativeTarget "Changelogger" */;
 			buildPhases = (
 				C2499C212CA9D20D0004E033 /* Sources */,
 				C2499C222CA9D20D0004E033 /* Frameworks */,
@@ -63,11 +68,12 @@
 			fileSystemSynchronizedGroups = (
 				C2499C272CA9D20D0004E033 /* Releaser */,
 			);
-			name = Releaser;
+			name = Changelogger;
 			packageProductDependencies = (
+				C28967B32CB541CA00AF68EB /* Defaults */,
 			);
 			productName = Releaser;
-			productReference = C2499C252CA9D20D0004E033 /* Releaser.app */;
+			productReference = C2499C252CA9D20D0004E033 /* Changelogger.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +91,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C2499C202CA9D20D0004E033 /* Build configuration list for PBXProject "Releaser" */;
+			buildConfigurationList = C2499C202CA9D20D0004E033 /* Build configuration list for PBXProject "Changelogger" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -94,12 +100,15 @@
 			);
 			mainGroup = C2499C1C2CA9D20D0004E033;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C28967B22CB541CA00AF68EB /* XCRemoteSwiftPackageReference "Defaults" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C2499C262CA9D20D0004E033 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C2499C242CA9D20D0004E033 /* Releaser */,
+				C2499C242CA9D20D0004E033 /* Changelogger */,
 			);
 		};
 /* End PBXProject section */
@@ -300,7 +309,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C2499C202CA9D20D0004E033 /* Build configuration list for PBXProject "Releaser" */ = {
+		C2499C202CA9D20D0004E033 /* Build configuration list for PBXProject "Changelogger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C2499C322CA9D20F0004E033 /* Debug */,
@@ -309,7 +318,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C2499C342CA9D20F0004E033 /* Build configuration list for PBXNativeTarget "Releaser" */ = {
+		C2499C342CA9D20F0004E033 /* Build configuration list for PBXNativeTarget "Changelogger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C2499C352CA9D20F0004E033 /* Debug */,
@@ -319,6 +328,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C28967B22CB541CA00AF68EB /* XCRemoteSwiftPackageReference "Defaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Defaults";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C28967B32CB541CA00AF68EB /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C28967B22CB541CA00AF68EB /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C2499C1D2CA9D20D0004E033 /* Project object */;
 }
