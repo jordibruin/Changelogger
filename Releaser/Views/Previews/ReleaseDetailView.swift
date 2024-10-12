@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import Defaults
 
 struct ReleaseDetailView: View {
     
     @Binding var release: Release
-    @State var selectedPreviewMode: PreviewMode = .html
+    @Default(.selectedPreviewMode) var selectedPreviewMode
     
     @State var newFeature: String = ""
     @State var newImprovement: String = ""
@@ -22,28 +23,6 @@ struct ReleaseDetailView: View {
             preview
         }
         .navigationTitle("Changelogger")
-        .toolbar {
-            ToolbarItem {
-                Picker(selection: $selectedPreviewMode) {
-                    ForEach(PreviewMode.allCases) { mode in
-                        Text(mode.name).tag(mode)
-                    }
-                } label: {
-                    Text("Preview Mode")
-                }
-                .pickerStyle(.segmented)
-                .labelsHidden()
-                .frame(width: 300)
-            }
-            
-            ToolbarItem(placement: .automatic, content: {
-                Button {
-                    release.features.removeAll()
-                } label: {
-                    Text("Clear")
-                }
-            })
-        }
     }
     
     var verticalInput: some View {
@@ -392,7 +371,18 @@ struct ReleaseDetailView: View {
             Color(.controlBackgroundColor)
 
             VStack {
-
+                Picker(selection: $selectedPreviewMode) {
+                    ForEach(PreviewMode.allCases) { mode in
+                        Text(mode.name).tag(mode)
+                    }
+                } label: {
+                    Text("Preview Mode")
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+                .padding()
+//                .frame(width: 300)
+                
                 Spacer()
                 selectedPreviewMode.view(release: release)
                 Spacer()
@@ -421,6 +411,7 @@ struct ReleaseDetailView: View {
 
                     }
                 }
+                .padding()
             }
             //        .padding([.vertical, .trailing] , 12)
         }
