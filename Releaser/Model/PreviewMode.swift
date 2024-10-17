@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
+import Defaults
 
-enum PreviewMode: String, Identifiable, CaseIterable {
+enum PreviewMode: String, Identifiable, CaseIterable, Defaults.Serializable {
     case normal
     case html
     case json
@@ -29,19 +30,22 @@ enum PreviewMode: String, Identifiable, CaseIterable {
     }
     
     @ViewBuilder
-    func view(release: Release) -> some View {
+    func view(release: Release, app: Application) -> some View {
         switch self {
         case .normal:
             TextEditor(text: .constant(release.normalText))
-                .padding(12)
+                .font(.title2)
+                .padding()
         case .html:
             TextEditor(text: .constant(release.htmlText))
-                .padding(12)
+                .font(.title2)
+                .padding()
         case .json:
             TextEditor(text: .constant(release.jsonText))
-                .padding(12)
+                .font(.title2)
+                .padding()
         case .screenshot:
-            Text("Screenshot")
+            ScreenshotView(release: release, app: app)
         }
     }
     

@@ -8,7 +8,7 @@
 import SwiftUI
 import Defaults
 //
-struct Feature: Identifiable, Equatable, Codable, Defaults.Serializable {
+struct Feature: Identifiable, Equatable, Codable, Defaults.Serializable, Hashable {
     let id: UUID
     var title: String
     let tag: FeatureTag

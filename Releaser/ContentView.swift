@@ -29,36 +29,34 @@ struct ContentView: View {
     
     var appSidebar: some View {
         List(selection: $selectedAppIndex) {
-            if apps.count > 0 {
-                ForEach(apps.indices, id: \.self) { index in
-                    NavigationLink(value: apps[index]) {
-                        Group {
-                            if let imageUrl = apps[index].imageUrl, let savedImage = NSImage(contentsOf: imageUrl) {
-                                Image(nsImage: savedImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 24, height: 24)
-                                    .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
-                            } else {
-                                RoundedRectangle(cornerRadius: 4, style: .continuous)
-                                    .frame(width: 24, height: 24)
-                                    .foregroundStyle(.secondary.opacity(0.2))
+            ForEach(apps.indices, id: \.self) { index in
+                NavigationLink(value: apps[index]) {
+                    Group {
+                        if let imageUrl = apps[index].imageUrl, let savedImage = NSImage(contentsOf: imageUrl) {
+                            Image(nsImage: savedImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .clipShape(RoundedRectangle(cornerRadius: 4, style: .continuous))
+                        } else {
+                            RoundedRectangle(cornerRadius: 4, style: .continuous)
+                                .frame(width: 24, height: 24)
+                                .foregroundStyle(.secondary.opacity(0.2))
+                        }
+                    }
+                    
+                    TextField("App Name", text: $apps[index].name)
+                        .contextMenu {
+                            Button(role: .destructive) {
+                                if let index = apps.firstIndex(of: apps[index]) {
+                                    withAnimation {
+                                        apps.remove(at: index)
+                                    }
+                                }
+                            } label: {
+                                Text("Delete")
                             }
                         }
-                        
-                        TextField("App Name", text: $apps[index].name)
-                            .contextMenu {
-                                Button(role: .destructive) {
-                                    if let index = apps.firstIndex(of: apps[index]) {
-                                        withAnimation {
-                                            apps.remove(at: index)
-                                        }
-                                    }
-                                } label: {
-                                    Text("Delete")
-                                }
-                            }
-                    }
                 }
             }
             
@@ -68,6 +66,7 @@ struct ContentView: View {
                 let newApp = Application(name: "New App", releases: [], id: UUID())
                 apps.append(newApp)
                 
+                Analytics.send(.newApp)
                 if apps.count == 1 {
                     selectedAppIndex = 0
                 } else {
@@ -79,13 +78,6 @@ struct ContentView: View {
                 Text("Add New App")
             }
             .buttonStyle(.plain)
-            
-            Button {
-                apps.removeAll()
-            } label: {
-                Text("Delete all")
-            }
-
         }
         .listStyle(.sidebar)
     }

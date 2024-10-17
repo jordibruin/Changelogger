@@ -9,4 +9,7 @@ import Defaults
 
 extension Defaults.Keys {
     static let apps = Key<[Application]>("apps", default: [])
+    static let selectedPreviewMode = Key<PreviewMode>("selectedPreviewMode", default: .normal)
+    
+//    static let userFeatureTags = Key<[FeatureTag]>("userFeatureTags", default: [])
 }
