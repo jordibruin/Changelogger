@@ -12,3 +12,10 @@ enum FeatureTag: String, Codable {
     case improvement
     case bugfix
 }
+
+import SwiftUI
+
+struct UserFeatureTag {
+    let id: UUID
+    let name: String
+}

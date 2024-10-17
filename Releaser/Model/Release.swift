@@ -8,10 +8,11 @@
 import SwiftUI
 import Defaults
 
-struct Release: Identifiable, Codable, Defaults.Serializable {
+struct Release: Identifiable, Codable, Defaults.Serializable, Hashable {
     let id: UUID
     var versionNumber: String
     var features: [Feature]
+    var date: Date?
     
     var normalText: String {
         var text = ""
@@ -21,26 +22,26 @@ struct Release: Identifiable, Codable, Defaults.Serializable {
             
             let newFeatures = features.filter({ $0.tag == .new })
             for feature in newFeatures {
-                text = text + "- \(feature.title)\(feature.pro ? " (Pro)" : "")\n"
+                text = text + "• \(feature.title)\(feature.pro ? " (Pro)" : "")\n"
             }
         }
         
         if !features.filter({ $0.tag == .improvement }).isEmpty {
-            text = text +  "\n\nImprovements: \n"
+            text = text +  "\nImprovements: \n"
             
             let newFeatures = features.filter({ $0.tag == .improvement })
             for feature in newFeatures {
-                text = text + "- \(feature.title)\(feature.pro ? " (Pro)" : "")\n"
+                text = text + "• \(feature.title)\(feature.pro ? " (Pro)" : "")\n"
             }
         }
         
         
         if !features.filter({ $0.tag == .bugfix }).isEmpty {
-            text = text + "\n\nBugfixes: \n"
+            text = text + "\nBugfixes: \n"
             
             let newFeatures = features.filter({ $0.tag == .bugfix })
             for feature in newFeatures {
-                text = text + "- \(feature.title)\(feature.pro ? " (Pro)" : "")\n"
+                text = text + "• \(feature.title)\(feature.pro ? " (Pro)" : "")\n"
             }
         }
         
@@ -49,6 +50,8 @@ struct Release: Identifiable, Codable, Defaults.Serializable {
     
     var htmlText: String {
         var text = "<ul>\n"
+        
+        text = text + "<h2>\(self.versionNumber)</h2>\n"
         
         if !features.filter({ $0.tag == .new }).isEmpty {
             text = text + "<h3>New:</h3>\n"
