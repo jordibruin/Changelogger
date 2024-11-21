@@ -30,9 +30,7 @@ struct ReleaseDetailView: View {
             if let lastRelease = app.lastRelease {
                 print(lastRelease.id)
             }
-            
-            print(activeRelease.id)
-            
+                    
             if let index = app.releases.firstIndex(where: { $0.id == activeRelease.id } ) {
                 app.releases[index] = activeRelease
             }
@@ -226,6 +224,7 @@ struct ReleaseDetailView: View {
     
     var verticalInput: some View {
         Form {
+            versionNumberSection
             newSection
             improvedSection
             bugfixSection
@@ -233,6 +232,18 @@ struct ReleaseDetailView: View {
             deleteSection
         }
         .formStyle(.grouped)
+    }
+    
+    
+    
+    var versionNumberSection: some View {
+        Section {
+            TextField("Version Number", text: $activeRelease.versionNumber, prompt: Text("\(app.name) \(activeRelease.versionNumber)"))
+//                .onSubmit {
+//                    
+//                }
+                .labelsHidden()
+        }
     }
     
     var newSection: some View {

@@ -18,7 +18,7 @@ struct Release: Identifiable, Codable, Defaults.Serializable, Hashable {
         var text = ""
         
         if !features.filter({ $0.tag == .new }).isEmpty {
-            text = "New: \n"
+            text = "■ New \n"
             
             let newFeatures = features.filter({ $0.tag == .new })
             for feature in newFeatures {
@@ -27,7 +27,7 @@ struct Release: Identifiable, Codable, Defaults.Serializable, Hashable {
         }
         
         if !features.filter({ $0.tag == .improvement }).isEmpty {
-            text = text +  "\nImprovements: \n"
+            text = text +  "\n■ Improvements \n"
             
             let newFeatures = features.filter({ $0.tag == .improvement })
             for feature in newFeatures {
@@ -37,7 +37,7 @@ struct Release: Identifiable, Codable, Defaults.Serializable, Hashable {
         
         
         if !features.filter({ $0.tag == .bugfix }).isEmpty {
-            text = text + "\nBugfixes: \n"
+            text = text + "\n■ Bugfixes \n"
             
             let newFeatures = features.filter({ $0.tag == .bugfix })
             for feature in newFeatures {

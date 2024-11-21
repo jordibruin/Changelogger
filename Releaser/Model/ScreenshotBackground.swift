@@ -13,6 +13,7 @@ enum ScreenshotBackground: String, Identifiable, CaseIterable {
     case red
     case sonomaLight
     case sonomaDark
+    case appIcon
     //    case custom
     
     var id: String { self.rawValue }
@@ -27,6 +28,8 @@ enum ScreenshotBackground: String, Identifiable, CaseIterable {
             Color.red
         case .sonomaDark, .sonomaLight:
             Color.white
+        case .appIcon:
+            Color.black
         }
     }
     

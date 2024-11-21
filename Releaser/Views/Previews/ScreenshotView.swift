@@ -49,7 +49,18 @@ struct ScreenshotView: View {
                         selectedBackground = background
                     } label: {
                         ZStack {
-                            if let image = background.image {
+                            if background == .appIcon {
+                                ZStack {
+                                    Color(.controlBackgroundColor)
+                                    
+                                    if let imageUrl = app.imageUrl, let savedImage = NSImage(contentsOf: imageUrl) {
+                                        Image(nsImage: savedImage)
+                                            .resizable()
+                                            .scaledToFit()
+                                    }
+                                }
+                                .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+                            } else if let image = background.image {
                                 image
                                     .resizable()
                                     .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
@@ -95,7 +106,7 @@ struct ScreenshotView: View {
             }
             .padding(8)
         }
-        .frame(width: 500, height: 500)
+        .frame(width: 500)
     }
     
     var resultScreenshot: some View {
@@ -110,12 +121,34 @@ struct ScreenshotView: View {
     
     @ViewBuilder
     var screenshotBackground: some View {
-        if let image = selectedBackground.image {
-            image
-                .resizable()
+        if selectedBackground == .appIcon {
+            if let imageUrl = app.imageUrl, let savedImage = NSImage(contentsOf: imageUrl) {
+                ZStack {
+                    Color.blue.opacity(0.5)
+                    
+                    Image(nsImage: savedImage)
+                        .resizable()
+                        .scaledToFill()
+                        .padding(-80)
+                        .frame(width: 500)
+                        .blur(radius: 20)
+                    
+                    Color.black.opacity(0.1)
+                }
+                .clipped()
+            } else {
+                selectedBackground.color
+            }
         } else {
-            selectedBackground.gradient
+            if let image = selectedBackground.image {
+                image
+                    .resizable()
+            } else {
+                selectedBackground.gradient
+            }
         }
+         
+        
     }
     
     var screenshotText: some View {
@@ -177,7 +210,7 @@ struct ScreenshotView: View {
     
     func updateImage() {
         
-        let renderer = ImageRenderer(content: screenshotView.frame(width: 400, height: 400))
+        let renderer = ImageRenderer(content: screenshotView.frame(width: 500))
         
         if let nsImage = renderer.nsImage {
             // use the rendered image somehow
